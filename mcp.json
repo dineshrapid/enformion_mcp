@@ -1,0 +1,31 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.dineshkumar/enformion-mcp",
+  "description": "MCP for Enformion Contact Enrich API — allows AI agents to perform person data enrichment queries.",
+  "version": "1.0.0",
+  "status": "active",
+  "packages": [
+    {
+      "registry_type": "pypi",
+      "identifier": "enformion-mcp",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environment_variables": [
+        {
+          "name": "GALAXY_AP_NAME",
+          "description": "Your Enformion galaxy-ap-name header",
+          "is_required": true,
+          "is_secret": false
+        },
+        {
+          "name": "GALAXY_AP_PASSWORD",
+          "description": "Your Enformion galaxy-ap-password header",
+          "is_required": true,
+          "is_secret": true
+        }
+      ]
+    }
+  ]
+}

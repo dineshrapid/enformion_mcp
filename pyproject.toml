@@ -1,0 +1,13 @@
+[project]
+name = "enformion-mcp"
+version = "1.0.0"
+description = "Python MCP for Enformion Contact Enrich API"
+authors = [{ name = "Dineshkumar S" }]
+requires-python = ">=3.10"
+dependencies = [
+    "mcp",
+    "requests"
+]
+
+[project.scripts]
+enformion-mcp = "src.main:main"
