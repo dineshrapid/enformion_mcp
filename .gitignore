@@ -1,1 +1,12 @@
 node_modules/
+
+# Python-generated files
+__pycache__
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+__pypackages__/
+*.pyc
+*.py[oc]
+.env
