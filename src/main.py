@@ -129,34 +129,49 @@ async def create_app():
                     "type": "http.response.body",
                     "body": json.dumps({"error": str(e)}).encode("utf-8"),
                 })
+    
+    routes = [
+        Route("/initialize", endpoint=HandleStreamableHttp(session_manager), methods=["POST"]),
+        Route("/", endpoint=HandleStreamableHttp(session_manager), methods=["POST"]),  # Optional root
+    ]
 
-    routes = [Route("/mcp", endpoint=HandleStreamableHttp(session_manager), methods=["POST"])]
     middleware = [Middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])]
 
-    @contextlib.asynccontextmanager
-    async def lifespan(app):
-        async with session_manager.run():
-            yield
-
-    return Starlette(routes=routes, middleware=middleware, lifespan=lifespan)
-
-
-async def start_server():
-    app = await create_app()
-    host, port = "0.0.0.0", 8080
-    logging.info(f"Starting Enformion MCP server at {host}:{port}")
-    config = uvicorn.Config(app, host=host, port=port)
-    server = uvicorn.Server(config)
-    await server.serve()
+    return Starlette(routes=routes, middleware=middleware)
 
 
 if __name__ == "__main__":
-    while True:
-        try:
-            asyncio.run(start_server())
-        except KeyboardInterrupt:
-            logging.info("Server stopped by user")
-            break
-        except Exception as e:
-            logging.error(f"Server crashed: {e}")
-            continue
+    import uvicorn
+    app = asyncio.run(create_app())
+    uvicorn.run(app, host="0.0.0.0", port=8080)
+
+#     routes = [Route("/mcp", endpoint=HandleStreamableHttp(session_manager), methods=["POST"])]
+#     middleware = [Middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])]
+
+#     @contextlib.asynccontextmanager
+#     async def lifespan(app):
+#         async with session_manager.run():
+#             yield
+
+#     return Starlette(routes=routes, middleware=middleware, lifespan=lifespan)
+
+
+# async def start_server():
+#     app = await create_app()
+#     host, port = "0.0.0.0", 8080
+#     logging.info(f"Starting Enformion MCP server at {host}:{port}")
+#     config = uvicorn.Config(app, host=host, port=port)
+#     server = uvicorn.Server(config)
+#     await server.serve()
+
+
+# if __name__ == "__main__":
+#     while True:
+#         try:
+#             asyncio.run(start_server())
+#         except KeyboardInterrupt:
+#             logging.info("Server stopped by user")
+#             break
+#         except Exception as e:
+#             logging.error(f"Server crashed: {e}")
+#             continue
