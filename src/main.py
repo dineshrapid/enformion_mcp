@@ -143,7 +143,7 @@ async def create_app():
 
 async def start_server():
     app = await create_app()
-    host, port = "0.0.0.0", 5003
+    host, port = "0.0.0.0", 8080
     logging.info(f"Starting Enformion MCP server at {host}:{port}")
     config = uvicorn.Config(app, host=host, port=port)
     server = uvicorn.Server(config)

@@ -17,9 +17,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose the port your app runs on
 ENV HOST=0.0.0.0
-ENV PORT=5003
+ENV PORT=8080
 
-EXPOSE 5003
+EXPOSE 8080
 
 
 # Set environment variables for Enformion API credentials
@@ -28,4 +28,4 @@ ENV GALAXY_AP_NAME=your_profile_name
 ENV GALAXY_AP_PASSWORD=your_profile_password
 
 # Run the MCP server
-CMD ["python", "main.py"]
+CMD ["python", "src/main.py"]
