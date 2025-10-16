@@ -13,4 +13,5 @@ services:
       GALAXY_AP_PASSWORD: your_profile_password
     runtime: python
     startCommand:
-      command: ["python", "main.py"]
+      run:
+        command: ["python", "main.py"]
