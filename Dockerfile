@@ -28,4 +28,4 @@ ENV GALAXY_AP_NAME=your_profile_name
 ENV GALAXY_AP_PASSWORD=your_profile_password
 
 # Run the MCP server
-CMD ["python", "src/main.py"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8080"]
