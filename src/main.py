@@ -131,11 +131,10 @@ async def create_app():
                 })
     
     routes = [
-        Route("/initialize", endpoint=HandleStreamableHttp(session_manager), methods=["POST"]),
         Route("/", endpoint=HandleStreamableHttp(session_manager), methods=["POST"]),  # Optional root
     ]
 
-    middleware = [Middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])]
+    middleware = [Middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"], allow_credentials=True)]
 
     @contextlib.asynccontextmanager
     async def lifespan(app):
