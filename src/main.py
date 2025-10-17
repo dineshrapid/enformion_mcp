@@ -137,7 +137,12 @@ async def create_app():
 
     middleware = [Middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])]
 
-    return Starlette(routes=routes, middleware=middleware)
+    @contextlib.asynccontextmanager
+    async def lifespan(app):
+        async with session_manager.run():
+            yield
+
+    return Starlette(routes=routes, middleware=middleware, lifespan=lifespan)
 
 
 if __name__ == "__main__":
