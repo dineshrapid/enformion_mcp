@@ -10,3 +10,4 @@ __pypackages__/
 *.pyc
 *.py[oc]
 .env
+mcp_venv/

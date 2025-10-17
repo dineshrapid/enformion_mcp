@@ -15,3 +15,4 @@ requests==2.32.5
 starlette==0.48.0
 toml==0.10.2
 uvicorn==0.37.0
+fastmcp>=0.1.0
